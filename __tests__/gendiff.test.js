@@ -23,3 +23,21 @@ test('gendiff compares flat JSON files', () => {
 
   expect(genDiff(filepath1, filepath2)).toBe(expected);
 });
+
+test('gendiff compares flat YAML files', () => {
+  const filepath1 = path.join(__dirname, '..', '__fixtures__', 'file1.yml');
+  const filepath2 = path.join(__dirname, '..', '__fixtures__', 'file2.yml');
+
+  const expected = [
+    '{',
+    '  - follow: false',
+    '    host: codica.io',
+    '  - proxy: 123.234.53.22',
+    '  - timeout: 50',
+    '  + timeout: 20',
+    '  + verbose: true',
+    '}',
+  ].join('\n');
+
+  expect(genDiff(filepath1, filepath2)).toBe(expected);
+});

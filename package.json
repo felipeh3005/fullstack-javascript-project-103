@@ -8,14 +8,15 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-  "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
-  "test:watch": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --watch",
-  "lint": "eslint ."
-},
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --watch",
+    "lint": "eslint ."
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "commander": "^11.1.0",
+    "js-yaml": "^4.1.1",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
