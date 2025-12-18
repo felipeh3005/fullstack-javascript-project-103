@@ -8,30 +8,32 @@ const buildDiff = (data1, data2) => {
   // Union de todas las claves de ambos objetos
   const keys = _.sortBy(_.union(Object.keys(data1), Object.keys(data2)));
 
-  return keys.flatMap((key) => {
+  return keys.map((key) => {
     const value1 = data1[key];
     const value2 = data2[key];
 
-    // Si la clave no existe en el segundo archivo ...removida
-    if (!_.has(data2, key)) {
-      return `  - ${key}: ${value1}`;
-    }
-
-    // Si la clave no existe en el primero ... agregada
     if (!_.has(data1, key)) {
-      return `  + ${key}: ${value2}`;
+      return { key, type: 'added', value: value2 };
     }
 
-    // Si existe en ambos pero los valores son distintos ... cambio
+    if (!_.has(data2, key)) {
+      return { key, type: 'removed', value: value1 };
+    }
+
+    if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
+      return { key, type: 'nested', children: buildDiff(value1, value2) };
+    }
+
     if (!_.isEqual(value1, value2)) {
-      return [
-        `  - ${key}: ${value1}`,
-        `  + ${key}: ${value2}`,
-      ];
+      return {
+        key,
+        type: 'changed',
+        oldValue: value1,
+        newValue: value2,
+      };
     }
 
-    // Si existe en ambos y es igual ... sin signo
-    return `    ${key}: ${value1}`;
+    return { key, type: 'unchanged', value: value1 };
   });
 };
 
