@@ -5,3 +5,4 @@
 [Ver demo comparacion .JSON](https://github.com/felipeh3005/fullstack-javascript-project-103/blob/main/video-demo-gendiff.js.mp4)
 [ver demo comparacion .YAML](https://github.com/felipeh3005/fullstack-javascript-project-103/blob/main/video-demo-gendiff.js(YAML).mp4)
 [Ver demo formateador 'stylish'](https://github.com/felipeh3005/fullstack-javascript-project-103/blob/main/video-demo-gendiff.js(stylish))
+[Ver demo formateador 'plain'](https://github.com/felipeh3005/fullstack-javascript-project-103/blob/main/video-demo-gendiff.js(formateador'plain'))
