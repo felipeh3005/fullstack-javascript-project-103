@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import parseByExtension from './parsers/index.js';
+import parseByExtension from './parsers';
 
 const parseFile = (filepath) => {
   const absolutePath = path.resolve(process.cwd(), filepath);

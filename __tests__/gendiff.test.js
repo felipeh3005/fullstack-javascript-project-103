@@ -1,14 +1,14 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import genDiff from '../src/index.js';
+import genDiff from '../src/index';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
-const expected = [
+const expectedStylish = [
   '{',
   '    common: {',
   '      + follow: false',
@@ -59,14 +59,14 @@ test('gendiff compares nested JSON', () => {
   const filepath1 = getFixturePath('file1.json');
   const filepath2 = getFixturePath('file2.json');
 
-  expect(genDiff(filepath1, filepath2)).toBe(expected);
+  expect(genDiff(filepath1, filepath2)).toBe(expectedStylish);
 });
 
 test('gendiff compares nested YAML', () => {
   const filepath1 = getFixturePath('file1.yml');
   const filepath2 = getFixturePath('file2.yml');
 
-  expect(genDiff(filepath1, filepath2)).toBe(expected);
+  expect(genDiff(filepath1, filepath2)).toBe(expectedStylish);
 });
 
 test('gendiff compares nested files in plain format', () => {
@@ -99,8 +99,11 @@ test('gendiff outputs diff tree in json format', () => {
 
   expect(parsed).toBeInstanceOf(Array);
 
-  const keys = parsed.map((node) => node.key).sort();
-  expect(keys).toEqual(['common', 'group1', 'group2', 'group3']);
+  const keys = parsed.map((node) => node.key);
+
+  expect(new Set(keys)).toEqual(
+    new Set(['common', 'group1', 'group2', 'group3']),
+  );
 
   const commonNode = parsed.find((node) => node.key === 'common');
   expect(commonNode.type).toBe('nested');
