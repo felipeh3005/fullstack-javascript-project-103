@@ -89,3 +89,20 @@ test('gendiff compares nested files in plain format', () => {
 
   expect(genDiff(filepath1, filepath2, 'plain')).toBe(expected);
 });
+
+test('gendiff outputs diff tree in json format', () => {
+  const filepath1 = getFixturePath('file1.json');
+  const filepath2 = getFixturePath('file2.json');
+
+  const result = genDiff(filepath1, filepath2, 'json');
+  const parsed = JSON.parse(result);
+
+  expect(parsed).toBeInstanceOf(Array);
+
+  const keys = parsed.map((node) => node.key).sort();
+  expect(keys).toEqual(['common', 'group1', 'group2', 'group3']);
+
+  const commonNode = parsed.find((node) => node.key === 'common');
+  expect(commonNode.type).toBe('nested');
+  expect(commonNode.children).toBeInstanceOf(Array);
+});
