@@ -1,7 +1,7 @@
 import path from 'node:path';
 
-import parseJson from './json';
-import parseYaml from './yaml';
+import parseJson from './json.js';
+import parseYaml from './yaml.js';
 
 const parsers = {
   '.json': parseJson,

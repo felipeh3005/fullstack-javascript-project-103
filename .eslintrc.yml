@@ -24,7 +24,7 @@ rules:
   import/extensions:
     - error
     - ignorePackages
-    - js: never
+    - js: always
 
 overrides:
   - files:
